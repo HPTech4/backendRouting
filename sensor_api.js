@@ -2,6 +2,32 @@ const express = require("express");
 const admin = require("firebase-admin");
 require("dotenv").config();
 
+// Validate required environment variables
+const requiredEnvVars = [
+  "FIREBASE_TYPE",
+  "FIREBASE_PROJECT_ID",
+  "FIREBASE_PRIVATE_KEY_ID",
+  "FIREBASE_PRIVATE_KEY",
+  "FIREBASE_CLIENT_EMAIL",
+  "FIREBASE_CLIENT_ID",
+  "FIREBASE_AUTH_URI",
+  "FIREBASE_TOKEN_URI",
+  "FIREBASE_AUTH_PROVIDER_CERT_URL",
+  "FIREBASE_CLIENT_CERT_URL",
+];
+
+const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+if (missingVars.length > 0) {
+  console.error(
+    "❌ Missing required environment variables:",
+    missingVars.join(", ")
+  );
+  console.error(
+    "Please set these variables in your Railway dashboard under the Variables tab."
+  );
+  process.exit(1);
+}
+
 // Initialize Firebase Admin using environment variables
 const serviceAccount = {
   type: process.env.FIREBASE_TYPE,
@@ -122,7 +148,6 @@ app.get("/", (req, res) => {
       "DELETE /api/sensor-data/del": "Delete all sensor data",
       "GET /health": "Health check",
     },
-    
   });
 });
 
