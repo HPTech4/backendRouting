@@ -1,25 +1,10 @@
 # Dependencies
 node_modules/
 
-# Environment variables (NEVER commit these!)
+# Environment variables
 .env
-.env.local
-.env*.local
-
-# Firebase credentials 
-serviceAccountKey.json
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
